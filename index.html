@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asinhrom | Portfolio</title>
+    
+    <!-- Подключаем шрифты для премиального вида -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+
+    <style>
+        /* --- 1. Цветовая палитра и переменные --- */
+        :root {
+            --bg-white: #FFFFFF;
+            --bg-cream: #F9F6F0;
+            --accent-gold: #D4AF37;
+            --text-dark-gold: #AA7C11;
+            --text-main: #2C2C2C;
+            --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --shadow-gold: 0 8px 24px rgba(212, 175, 55, 0.2);
+            --transition: all 0.3s ease;
+        }
+
+        /* --- Базовые стили --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-white);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* --- 2. Шапка (Header) --- */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-dark-gold);
+            letter-spacing: 1px;
+        }
+
+        nav ul {
+            display: flex;
+            gap: 30px;
+        }
+
+        nav a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-main);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        nav a:hover {
+            color: var(--accent-gold);
+        }
+
+        /* Мобильное меню (гамбургер) скрыто на ПК */
+        .mobile-menu-btn {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-dark-gold);
+        }
+
+        /* --- 3. Главный экран (Hero Section) --- */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            padding-top: 80px; /* Отступ под хедер */
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            color: var(--text-dark-gold);
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 40px;
+            color: var(--text-main);
+            font-weight: 300;
+        }
+
+        .btn-gold {
+            display: inline-block;
+            padding: 15px 35px;
+            background-color: transparent;
+            border: 2px solid var(--accent-gold);
+            color: var(--text-dark-gold);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 50px;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .btn-gold:hover {
+            background-color: var(--accent-gold);
+            color: var(--bg-white);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        /* --- 4. Блок проектов (My Projects) --- */
+        #projects {
+            background-color: var(--bg-cream);
+            border-radius: 20px;
+            margin: 40px auto;
+            /* Растягиваем фон на всю ширину визуально, но контент центрируем */
+            width: 100%; 
+            max-width: 100%; 
+        }
+
+        .projects-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.5rem;
+            color: var(--text-dark-gold);
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .project-card {
+            background-color: var(--bg-white);
+            border-radius: 16px;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            box-shadow: var(--shadow-soft);
+            transition: var(--transition);
+            max-width: 900px;
+            margin: 0 auto;
+            border: 1px solid rgba(212, 175, 55, 0.1);
+        }
+
+        /* Эффект при наведении на карточку */
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-gold);
+        }
+
+        /* Логотип IncludeAI */
+        .project-logo-wrapper {
+            flex-shrink: 0;
+            position: relative;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo-circle {
+            width: 100px;
+            height: 100px;
+            background: linear-gradient(135deg, #F9F6F0 0%, #FFFFFF 100%);
+            border: 2px solid var(--accent-gold);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Playfair Display', serif;
+            font-size: 2rem;
+            color: var(--text-dark-gold);
+            font-weight: bold;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-badge {
+            position: absolute;
+            top: -5px;
+            right: 0;
+            background-color: var(--accent-gold);
+            color: white;
+            font-size: 0.7rem;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-weight: 700;
+            z-index: 2;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        .project-info h3 {
+            font-size: 1.8rem;
+            color: var(--text-dark-gold);
+            margin-bottom: 15px;
+        }
+
+        .project-info p {
+            font-size: 1rem;
+            color: var(--text-main);
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+
+        .btn-small {
+            padding: 10px 25px;
+            font-size: 0.9rem;
+        }
+
+        /* --- 5. Обо мне (About Me) --- */
+        #about {
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            color: var(--text-main);
+            margin-bottom: 30px;
+        }
+
+        .highlight {
+            color: var(--text-dark-gold);
+            font-weight: 600;
+        }
+
+        /* --- Footer --- */
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-size: 0.9rem;
+            color: #888;
+            border-top: 1px solid #eee;
+        }
+
+        /* --- Адаптивность (Mobile) --- */
+        @media (max-width: 768px) {
+            header {
+                padding: 15px 20px;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            nav ul {
+                display: none; /* Скрываем меню на мобильном */
+                flex-direction: column;
+                position: absolute;
+                top: 60px;
+                left: 0;
+                width: 100%;
+                background-color: var(--bg-white);
+                padding: 20px;
+                box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+                text-align: center;
+            }
+
+            nav ul.active {
+                display: flex;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .project-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 30px 20px;
+            }
+
+            .project-logo-wrapper {
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Шапка -->
+    <header>
+        <div class="logo">Asinhrom</div>
+        <div class="mobile-menu-btn" onclick="toggleMenu()">☰</div>
+        <nav>
+            <ul id="nav-list">
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#projects">Проекты</a></li>
+                <li><a href="#about">Обо мне</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Главный экран -->
+    <section id="home" class="hero">
+        <h1>Привет, я Asinhrom</h1>
+        <p>Создатель децентрализованных ИИ-ассистентов и веб-разработчик. Создаю технологии, которые летают на сверхзвуковой скорости.</p>
+        <a href="#projects" class="btn-gold">Смотреть проекты</a>
+    </section>
+
+    <!-- Проекты -->
+    <div id="projects">
+        <div class="projects-container">
+            <h2 class="section-title">Мои Проекты</h2>
+            
+            <!-- Карточка includeAI -->
+            <div class="project-card">
+                <div class="project-logo-wrapper">
+                    <div class="logo-circle">In</div>
+                    <div class="logo-badge">AI</div>
+                </div>
+                <div class="project-info">
+                    <h3>includeAI</h3>
+                    <p>Твой личный ИИ-ассистент, который работает без рекламы, платных подписок и душной регистрации. Запускается на твоем собственном ключе Hugging Face, обходя перегруженные дата-центры, и отвечает на сверхзвуковой скорости!</p>
+                    <a href="https://github.io" target="_blank" class="btn-gold btn-small">Открыть includeAI</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Обо мне -->
+    <section id="about">
+        <h2 class="section-title">Обо мне</h2>
+        <p class="about-text">
+            Я вдохновляюсь подходом компании <span class="highlight">Anthropic</span> и создаю независимые ИТ-продукты. Я считаю, что современные корпорации зря тратят миллиарды долларов на огромные дата-центры, забивая сервера миллионами запросов через один ключ.
+        </p>
+        <p class="about-text">
+            Мой подход — <span class="highlight">децентрализация и свобода пользователя</span>. Все данные моих приложений хранятся только в вашем браузере (localStorage). Никаких следов, только чистый код и скорость.
+        </p>
+    </section>
+
+    <!-- Футер -->
+    <footer>
+        <p>&copy; 2026 Asinhrom. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Плавный скролл для якорных ссылок
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Закрываем меню на мобильном после клика
+                const navList = document.getElementById('nav-list');
+                if (navList.classList.contains('active')) {
+                    navList.classList.remove('active');
+                }
+            });
+        });
+
+        // Мобильное меню
+        function toggleMenu() {
+            const navList = document.getElementById('nav-list');
+            navList.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>
